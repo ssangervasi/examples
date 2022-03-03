@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -e
+
+export PATH="$PATH:$PWD/node_modules/.bin"
+
+cd declarative-components-imperative-objects
+mkdir -p images
+
+# carbon-now --help timing.ts
+carbon-now --headless timing.ts --target images/timing.ts

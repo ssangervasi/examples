@@ -9,11 +9,10 @@ main() {
 }
 
 loop_dirs() {
-	find . -maxdepth 1 -type d | while read d; do
-		echo "$d"
-		# pushd "$d"
-		# loop_images
-		# popd
+	find ./examples -mindepth 1 -maxdepth 1 -type d | while read d; do
+		pushd "$d"
+		loop_images
+		popd
 	done
 }
 
@@ -26,9 +25,8 @@ loop_images() {
 }
 
 carbon() {
-	# carbon-now --headless timing.ts --target images/timing.ts
 	echo carbon-now --headless "$1" --target images/"$1"
-	# carbon-now --headless "$1" --target images/"$1"
+	carbon-now --headless "$1" --target images/"$1"
 }
 
 main

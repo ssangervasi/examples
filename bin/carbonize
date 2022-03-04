@@ -1,10 +1,33 @@
 #!/usr/bin/env bash
 set -e
 
-export PATH="$PATH:$PWD/node_modules/.bin"
+main() {
+	cd $(dirname $BASH_SOURCE)/..
+	export PATH="$PATH:$PWD/node_modules/.bin"
 
-cd declarative-components-imperative-objects
-mkdir -p images
+	loop_dirs
+}
 
-# carbon-now --help timing.ts
-carbon-now --headless timing.ts --target images/timing.ts
+loop_dirs() {
+	find . -maxdepth 1 -type d | while read d; do
+		pushd "$d"
+		loop_images
+		popd
+	done
+}
+
+loop_images() {
+	mkdir -p images
+
+	find . -maxdepth 1 -type f | while read f; do
+		carbon "$(basename $f)"
+	done
+}
+
+carbon() {
+	# carbon-now --headless timing.ts --target images/timing.ts
+	echo carbon-now --headless "$1" --target images/"$1"
+	carbon-now --headless "$1" --target images/"$1"
+}
+
+main

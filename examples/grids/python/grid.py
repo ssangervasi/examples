@@ -19,7 +19,7 @@ def demo():
 
     # Assignment is easy:
     grid[(0, 0)] = "⌞"
-    grid[(n-1, n-1)] = "⌝"
+    grid[(n - 1, n - 1)] = "⌝"
 
     # Helper functions that just work on the dictionary:
     fill(grid, "!", start=(2, 3), stop=(5, 5))
